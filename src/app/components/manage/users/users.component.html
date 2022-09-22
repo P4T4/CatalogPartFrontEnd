@@ -1,0 +1,83 @@
+<div>
+    <div flex class="custom-title-header">
+        <h1>Administrar usuarios</h1>
+    </div>
+    <!-- BUTTONS -->
+    <div flex class="mb-4">
+        <button *ngIf="!hasSelectedChecked" mat-raised-button class="mb-05" color="primary" (click)="openPopUp(null, true)">Nuevo
+            Usuario</button>
+        <button *ngIf="hasSelectedChecked" mat-raised-button (click)="openPopUp(selection, false)">Editar</button>
+    </div>
+    <!-- FILTERS -->
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div *ngIf="userView.typeUser == 1" fxFlex="45%">
+            <!-- FORM FILTER -->
+            <mat-form-field appearance="outline" fxFlex="100%">
+                <mat-label>Consultar por empresa</mat-label>
+                <select matNativeControl (change)="doFilterSelect($event.target.value)">
+                    <option value="">Selecciona una empresa a filtrar</option>
+                    <option [value]="company.enterpriseId" *ngFor="let company of companiesList">
+                        {{company.businessName}}
+                    </option>
+                </select>
+            </mat-form-field>
+        </div>
+        <div fxFlex="45%">
+            <mat-form-field appearance="outline" fxFlex="100%">
+                <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filtro global...">
+            </mat-form-field>
+        </div>
+    </div>
+    <!-- TABLE -->
+    <div flex class="mt-4">
+        <div class="mat-elevation-z8">
+            <mat-table [dataSource]="dataSource" matSort>
+                <ng-container matColumnDef="action">
+                    <mat-header-cell *matHeaderCellDef class="tableHead">Acciones </mat-header-cell>
+                    <mat-cell *matCellDef="let row" class="tableBody">
+                        <mat-slide-toggle color="primary" (click)="$event.stopPropagation()"
+                            (change)="individualSelection(row, $event)" [checked]="selection.isSelected(row)">
+                        </mat-slide-toggle>
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header class="tableHead"> Nombre
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let row" data-label="referencia" class="tableBody">
+                        {{row.name}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="email">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header class="tableHead"> Email
+                    </mat-header-cell>
+                    <mat-cell center *matCellDef="let row" data-label="descripcion" class="tableBody">
+                        {{row.email}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="isActive">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header class="tableHead"> Activo
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let row" data-label="precio" class="tableBody">
+                        {{row.isActive? 'Si': 'No'}} </mat-cell>
+                </ng-container>
+
+                <!-- <ng-container matColumnDef="action">
+                    <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        <button matTooltip="Editar usuario" mat-icon-button mat-sm-button
+                            color="primary" class="mr-1" (click)="openPopUp(row)">
+                            <mat-icon class="btnEdit">edit</mat-icon>
+                        </button>
+                        <button matTooltip="Eliminar usuario" mat-icon-button mat-sm-button
+                            color="warn">
+                            <mat-icon class="btnDelete">delete</mat-icon>
+                        </button>
+                    </mat-cell>
+                </ng-container> -->
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;">
+                </mat-row>
+            </mat-table>
+            <mat-paginator [pageSizeOptions]="[10, 20, 30]"></mat-paginator>
+        </div>
+    </div>
+</div>

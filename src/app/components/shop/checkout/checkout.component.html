@@ -1,0 +1,303 @@
+<div>
+    <h2 class="custom-title-header">Confirmar compra</h2>
+    <div fxLayout="row" fxLayout.lt-md="column" *ngIf="productList.length">
+        <div fxFlex="60" [@animate]="{value:'*',params:{delay: '100ms', x:'-50px'}}">
+            <mat-card class="mb-1">
+                <mat-card-title>
+                    Dirección de Envio
+                </mat-card-title>
+                <form #form="ngForm">
+                    <div fxLayout="row wrap" fxLayout.lt-sm="column">
+                        <!--<div fxFlex="50" class="pr-1">
+                            <mat-form-field class="full-width">
+                                <mat-select placeholder="Ciudad" [formControl]="checkoutForm.controls['country']">
+                                    <mat-option *ngFor="let c of cities" [value]="infoUser.city">
+                                        {{ c.name }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>-->
+                        <div fxFlex="50" class="pr-1">
+                            <mat-form-field class="full-width">
+                                <input matInput placeholder="Ciudad" class="form-control" [(ngModel)]="infoUser.city"
+                                    name="cityView" [class.is-invalid]="cityView.invalid && cityView.touched" required
+                                    #cityView="ngModel" />
+                                <small *ngIf="cityView.invalid && cityView.touched" class="form-text text-danger">La
+                                    ciudad es obligatoria.</small>
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex="50" class="pr-1">
+                            <mat-form-field class="full-width">
+                                <input matInput placeholder="Dirección" class="form-control"
+                                    [(ngModel)]="infoUser.address" name="address"
+                                    [class.is-invalid]="address.invalid && address.touched" required
+                                    #address="ngModel" />
+                                <small *ngIf="address.invalid && address.touched" class="form-text text-danger">La
+                                    dirección es obligatoria.</small>
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex="50" class="pr-1">
+                            <mat-form-field class="full-width">
+                                <input matInput placeholder="Número de Identificación" class="form-control"
+                                    [(ngModel)]="infoUser.identificationNumber" name="identificationNumber"
+                                    [class.is-invalid]="identificationNumber.invalid && identificationNumber.touched"
+                                    required #identificationNumber="ngModel" />
+                                <small *ngIf="identificationNumber.invalid && identificationNumber.touched"
+                                    class="form-text text-danger">El número de identificación es obligatorio.</small>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="50" class="pr-1">
+                            <mat-form-field class="full-width">
+                                <input matInput placeholder="Teléfono" class="form-control" [(ngModel)]="infoUser.phone"
+                                    name="phone" [class.is-invalid]="phone.invalid && phone.touched" required
+                                    #phone="ngModel" />
+                                <small *ngIf="phone.invalid && phone.touched" class="form-text text-danger">El teléfono
+                                    es obligatorio.</small>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="50" class="pr-1">
+                            <mat-form-field class="full-width">
+                                <input matInput placeholder="Persona de contacto" class="form-control"
+                                    [(ngModel)]="infoUser.contactPerson" name="contactPerson"
+                                    [class.is-invalid]="contactPerson.invalid && contactPerson.touched" required
+                                    #contactPerson="ngModel" />
+                                <small *ngIf="contactPerson.invalid && contactPerson.touched"
+                                    class="form-text text-danger">La persona de contacto es obligatoria.</small>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <mat-card-actions>
+                        <span fxFlex></span>
+                        <button mat-raised-button color="primary" [disabled]="!form.valid"
+                            (click)="saveChangeInfoUser()">Guardar Cambios</button>
+                    </mat-card-actions>
+                </form>
+            </mat-card>
+        </div>
+        <div fxFlex="40" [@animate]="{value:'*',params:{delay: '100ms', x:'50px'}}">
+            <mat-card class="default">
+                <mat-card-title>
+                    Tu orden
+                </mat-card-title>
+                <mat-card-content class="p-0">
+                    <mat-list class="compact-list mb-1">
+                        <mat-divider></mat-divider>
+                        <mat-list-item class="" *ngFor="let product of productList">
+                            <img mat-list-avatar class="mr-1" src="assets/images/mock-logo-1.png" alt="">
+                            <div fxLayout="row" fxFlex="100">
+                                <h6 class="m-0 mr-1 text-muted">
+                                    <small>{{product.productName}} x {{product.quantity}}</small>
+                                </h6>
+                                <span fxFlex></span>
+                                <div class="text-muted">{{product.price | currency }}</div>
+                            </div>
+                            <mat-divider></mat-divider>
+                        </mat-list-item>
+
+                        <mat-list-item>
+                            <div fxFlex="56px"></div>
+                            <div fxLayout="row" fxFlex="100">
+                                <h6 class="m-0 mr-1 text-muted">
+                                    <small>
+                                        <strong>Subtotal:</strong>
+                                    </small>
+                                </h6>
+                                <span fxFlex></span>
+                                <div class="text-muted">{{subTotal | currency}}</div>
+                            </div>
+                            <mat-divider></mat-divider>
+                        </mat-list-item>
+
+                        <mat-list-item>
+                            <div fxFlex="56px"></div>
+                            <div fxLayout="row" fxFlex="100">
+                                <h6 class="m-0 mr-1 text-muted">
+                                    <small>
+                                        <strong>IVA {{vat}}%:</strong>
+                                    </small>
+                                </h6>
+                                <span fxFlex></span>
+                                <div class="text-muted">{{vatTotal| currency}}</div>
+                            </div>
+                        </mat-list-item>
+
+                        <mat-list-item>
+                            <div fxFlex="56px"></div>
+                            <div fxLayout="row" fxFlex="100">
+                                <h6 class="m-0 mr-1 text-muted">
+                                    <small>
+                                        <strong>Total:</strong>
+                                    </small>
+                                </h6>
+                                <span fxFlex></span>
+                                <div class="text-muted">{{total | currency}}</div>
+                            </div>
+                        </mat-list-item>
+                    </mat-list>
+
+                    <mat-card-actions>
+                        <span fxFlex></span>
+                        <button mat-raised-button color="primary" routerLink="/shop/cart">Volver al Carro</button>
+                        <button mat-raised-button color="warn" (click)="placeOrder()">Realizar Pedido</button>
+                    </mat-card-actions>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+    <div *ngIf="!productList.length" [@animate]="{value:'*',params:{delay: '100ms', y:'-50px'}}">
+        <mat-card class="text-center">
+            <p>Tu carro está vacio</p>
+            <button mat-raised-button color="accent" routerLink="/catalogo">Regresa a comprar</button>
+        </mat-card>
+    </div>
+</div>
+
+<!--<div>
+    <div fxLayout="row" fxLayout.lt-md="column" *ngIf="productList.length">
+        <div fxFlex="60" [@animate]="{value:'*',params:{delay: '100ms', x:'-50px'}}">
+            <mat-card class="mb-1">
+                <mat-card-title>
+                    Dirección de Envio
+                </mat-card-title>
+                <form [formGroup]="checkoutForm">
+                    <div fxLayout="row wrap" fxLayout.lt-sm="column">
+                        <div fxFlex="50" class="pr-1">
+                            <mat-form-field class="full-width">
+                                <mat-select placeholder="Ciudad" [formControl]="checkoutForm.controls['country']">
+                                    <mat-option *ngFor="let c of cities" [value]="c.name">
+                                        {{ c.name }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="50" class="pr-1">
+                            <mat-form-field class="full-width">
+                                <input matInput placeholder="Dirección" class="form-control" [(ngModel)]="infoUser.address" name="address" [class.is-invalid]="address.invalid && address.touched" required #address="ngModel" />
+                                <small *ngIf="address.invalid && address.touched" class="form-text text-danger">La dirección es obligatoria.</small>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="50" class="pr-1">
+                            <mat-form-field class="full-width">
+                                <input matInput placeholder="Número de Identificación" class="form-control" [(ngModel)]="infoUser.identificationNumber" name="identificationNumber" [class.is-invalid]="identificationNumber.invalid && identificationNumber.touched" required #identificationNumber="ngModel"
+                                />
+                                <small *ngIf="identificationNumber.invalid && identificationNumber.touched" class="form-text text-danger">El número de identificación es obligatorio.</small>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="50" class="pr-1">
+                            <mat-form-field class="full-width">
+                                <input matInput placeholder="Teléfono" class="form-control" [(ngModel)]="infoUser.phone" name="phone" [class.is-invalid]="phone.invalid && phone.touched" required #phone="ngModel" />
+                                <small *ngIf="phone.invalid && phone.touched" class="form-text text-danger">El teléfono es obligatorio.</small>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="50" class="pr-1">
+                            <mat-form-field class="full-width">
+                                <input matInput placeholder="Persona de contacto" class="form-control" [(ngModel)]="infoUser.contactPerson" name="contactPerson" [class.is-invalid]="contactPerson.invalid && contactPerson.touched" required #contactPerson="ngModel" />
+                                <small *ngIf="contactPerson.invalid && contactPerson.touched" class="form-text text-danger">La persona de contacto es obligatoria.</small>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="50" class="pr-1">
+                            <mat-form-field class="full-width">
+                                <input matInput placeholder="Address line 2" value="" [formControl]="checkoutForm.controls['address2']">
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="50" class="pr-1">
+                            <mat-form-field class="full-width">
+                                <input matInput placeholder="City" [formControl]="checkoutForm.controls['city']">
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="50" class="pr-1">
+                            <mat-form-field class="full-width">
+                                <input matInput type="number" placeholder="Zip" [formControl]="checkoutForm.controls['zip']">
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="50" class="pr-1">
+                            <mat-form-field class="full-width">
+                                <input matInput placeholder="Phone" [formControl]="checkoutForm.controls['phone']">
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="50" class="pr-1">
+                            <mat-form-field class="full-width">
+                                <input matInput placeholder="Email" [formControl]="checkoutForm.controls['email']">
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+                </form>
+        </div>
+
+        <div fxFlex="40" [@animate]="{value:'*',params:{delay: '100ms', x:'50px'}}">
+            <mat-card class="default">
+                <mat-card-title>
+                    Tu orden
+                </mat-card-title>
+                <mat-card-content class="p-0">
+                    <mat-list class="compact-list mb-1">
+                        <mat-divider></mat-divider>
+                        <mat-list-item class="" *ngFor="let product of productList">
+                            <img mat-list-avatar class="mr-1" src="assets/images/mock-logo-1.png" alt="">
+                            <div fxLayout="row" fxFlex="100">
+                                <h6 class="m-0 mr-1 text-muted">
+                                    <small>{{product.productName}} x {{product.quantity}}</small>
+                                </h6>
+                                <span fxFlex></span>
+                                <div class="text-muted">{{product.price | currency }}</div>
+                            </div>
+                            <mat-divider></mat-divider>
+                        </mat-list-item>
+
+                        <mat-list-item>
+                            <div fxFlex="56px"></div>
+                            <div fxLayout="row" fxFlex="100">
+                                <h6 class="m-0 mr-1 text-muted">
+                                    <small>
+                    <strong>Subtotal:</strong>
+                  </small>
+                                </h6>
+                                <span fxFlex></span>
+                                <div class="text-muted">{{subTotal | currency}}</div>
+                            </div>
+                            <mat-divider></mat-divider>
+                        </mat-list-item>
+
+                        <mat-list-item>
+                            <div fxFlex="56px"></div>
+                            <div fxLayout="row" fxFlex="100">
+                                <h6 class="m-0 mr-1 text-muted">
+                                    <small>
+                    <strong>Total:</strong>
+                  </small>
+                                </h6>
+                                <span fxFlex></span>
+                                <div class="text-muted">{{total | currency}}</div>
+                            </div>
+                        </mat-list-item>
+                    </mat-list>
+
+                    <mat-card-actions>
+                        <span fxFlex></span>
+                        <button mat-raised-button color="primary" routerLink="/shop/cart">volver al Carrito</button>
+                        <button mat-raised-button color="warn" (click)="placeOrder()">Realizar Pedido</button>
+                    </mat-card-actions>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+
+    <div *ngIf="!productList.length" [@animate]="{value:'*',params:{delay: '100ms', y:'-50px'}}">
+        <mat-card class="text-center">
+            <p>Tu carro está vacio</p>
+            <button mat-raised-button color="accent" routerLink="/catalogos">Regresa a comprar</button>
+        </mat-card>
+    </div>
+</div>-->

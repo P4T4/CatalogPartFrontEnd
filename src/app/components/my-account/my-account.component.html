@@ -1,0 +1,17 @@
+<mat-tab-group animationDuration="500ms">
+    <mat-tab label="Mi cuenta" *ngIf="currentAccount.typeUser != 1">
+        <ng-template matTabContent>
+            <app-form-admin *ngIf="currentAccount.typeUser == 3; else normalUser">
+                <!-- <app-form-admin *ngIf="currentAccount.typeUser == 5; else normalUser"> -->
+            </app-form-admin>
+            <ng-template #normalUser>
+                <app-form></app-form>
+            </ng-template>
+        </ng-template>
+    </mat-tab>
+    <mat-tab label="Cambio contraseña">
+        <ng-template matTabContent>
+            <app-change-password></app-change-password>
+        </ng-template>
+    </mat-tab>
+</mat-tab-group>

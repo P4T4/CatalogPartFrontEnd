@@ -1,0 +1,95 @@
+<!-- <h1 class="divContainer" style="margin: 10px;" class="textSubTitulo textTitle">
+    Detalle del Producto 
+</h1> -->
+<div flex class="custom-title-header">
+    <h1 class="text-white mt-16">Detalle del Producto:</h1>
+</div>
+<div flex class="mt-24">
+    <div class="mat-elevation-z8">
+        <div fxLayout="row wrap" class="divContainer p-48" *ngIf="content">
+            <div fxFlex="100" fxFlex.gt-sm="100" fxFlex.sm="100">
+
+                <div *ngIf="productIdList">
+                    <div>
+                        <div *ngIf="imagePath">
+                            <img src="assets/images/marcas/productDetDefaul.png" class="imgEstatica" title="Logo">
+                        </div>
+
+                        <div *ngIf="filePreview">
+                            <img [src]="convertBase64toUrl(productIdList.imageBase64)" class="imgEstatica"
+                                title="Producto" />
+                        </div>
+                    </div>
+
+                    <div fxFlex="50" class="detProduct">
+                        <h1 class="titleProd">{{productIdList.description}}</h1>
+                        <p class="text-muted p-line" class="textProduct" *ngIf="productIdList.isAvailable">
+                            <strong>Precio: </strong> <span class="mat-color-default">{{productIdList.unitPrice |
+                                currency}}</span>
+                        </p>
+
+                        <div class="opt-quantity mb-1" *ngIf="productIdList.isAvailable">
+                            <label for="quantity" class="textProduct">Cantidad (Disponibles {{amountAvaluable}}):
+                            </label>
+                            <input class="quantity-input default-bg" id="quantity" name="quantity" min="1"
+                                [max]="amountAvaluable" type="number" [(ngModel)]="quantity">
+                        </div>
+                        <div class="opt-quantity mb-1" *ngIf="!productIdList.isAvailable">
+                            <label for="quantity" class="textProduct"><strong>Comunicate con nuestro asesor para
+                                    confirmar la disponibilidad del producto.</strong></label>
+                        </div>
+
+                        <div fxLayout="row">
+                            <button mat-raised-button color="accent" (click)="addToCart()"
+                                *ngIf="productIdList.isAvailable">
+                                <span class="material-icons"> add_shopping_cart </span> Agregar al carrito
+                            </button>
+                            <span fxFlex="8px"></span>
+                            <button mat-raised-button color="primary" (click)="return()">
+                                <span class="material-icons"> arrow_back_ios </span> Regresar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="product-details-wrap m-333" fxLayout="row wrap" fxLayout.lt-md="column">
+    <div *ngIf="productIdList">
+
+        <div fxFlex.lt-md="auto" fxFlex="50" class="product-photos-wrap">
+            <div class="gallery-photo">
+
+                <div class="divBorder" *ngIf="imagePath">
+                    <img src="assets/images/marcas/productDefault.jpg" class="imgLogo" title="Logo">
+                </div>
+
+                <div class="divBorder" *ngIf="filePreview">
+                    <img [src]="convertBase64toUrl(productIdList.imageBase64)" title="Marca" />
+                </div>
+            </div>
+
+        </div>
+        <div fxFlex="50" class="product-content-wrap" [@animate]="{value:'*',params:{delay: '100ms', x:'50px'}}">
+            <h1 class="title">{{productIdList.description}}</h1>
+            <div class="main-info mb-1">
+                <p class="text-muted p-line"><strong>Precio: </strong> <span class="mat-color-default">{{productIdList.unitPrice | currency}}</span></p>
+            </div>
+            <div class="opt-quantity mb-1">
+                <label class="option-label text-muted" for="quantity">Cantidad: </label>
+                <input class="quantity-input default-bg" id="quantity" name="quantity" min="1" type="number" [(ngModel)]="quantity">
+            </div>
+            <div fxLayout="row">
+                <button mat-raised-button color="accent" (click)="addToCart()">
+                    <span class="material-icons"> add_shopping_cart </span> Agregar al carrito
+                </button>
+                <span fxFlex="8px"></span>
+                <button mat-raised-button color="primary" (click)="return()">                    
+                    <span class="material-icons"> arrow_back_ios </span> Regresar
+                </button>
+            </div>
+        </div>
+    </div>
+</div> -->

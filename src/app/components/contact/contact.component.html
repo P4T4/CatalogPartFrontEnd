@@ -1,0 +1,75 @@
+<div class="page-layout overflow-hidden pb-8">
+    <div class="header-bg">
+        <img class="imgPageSinLogin" src="assets/images/imgSinLogueo/HyundaiSonata1.png">
+    </div>
+    <div class="content">
+        <div class="content-header p-24" fxLayout="row wrap" fxLayoutAlign="start center">
+            <h1 class="textoImg">CONTÁCTENOS</h1>
+        </div>
+    </div>
+</div>
+
+<div fxLayout="row wrap">
+    <div fxFlex="100" fxFlex.gt-sm="auto">
+        <mat-card class="p-0" style="margin-top: 70px; margin-left: 70px; margin-right: 70Px; ">
+            <mat-card-content class="p-0">
+                <agm-map [ngStyle]="{height: '400px'}" [zoom]="zoom" [latitude]="mapCenter.lat" [longitude]="mapCenter.lng">
+                    <agm-marker [latitude]="mapCenter.lat" [longitude]="mapCenter.lng">
+                        <agm-info-window [disableAutoPan]="true" [isOpen]="true">
+                            <p><strong>MOLINA Y COMPAÑÍA SAS</strong></p>
+                        </agm-info-window>
+                    </agm-marker>
+                </agm-map>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
+
+<div class="page-layout overflow-hidden ">
+    <div class="page-layout" style="text-align: center;">
+        <div style="padding-left: 45px; float: left; width: 50%; text-align: justify;">
+            <p class="textSubTitulo" style="color:rgb(20, 24, 137);">INFORMACIÓN DE CONTACTO</p>
+            <p>
+                <span class="material-icons">room</span> Dirección: Cra. 22A No. 27A-21 Sur Barrio Olaya, Bogotá Colombia
+            </p>
+            <p>
+                <span class="material-icons">smartphone</span> Celular: <a href="tel:3133250187" style="color: blue;">313 325 01 87</a>
+            </p>
+            <p>
+                <span class="material-icons">phone</span> Teléfono fijo: <a href="tel:+13885052" style="color: blue;">+1 388 50 52</a>
+            </p>
+            <p>
+                <span class="material-icons">email</span> Email: <a href="mailto:dircomercial@molinaycompania.com" style="color: blue;">dircomercial@molinaycompania.com</a>
+            </p>
+            <p class="textSubTitulo" style="color:rgb(20, 24, 137);">HORARIO</p>
+            <div>Departamento de Ventas
+                <p>Lun: 7:00am – 7:00pm</p>
+                <p>Mar: 7:00am – 7:00pm</p>
+                <p>Mie: 7:00am – 7:00pm</p>
+                <p>Jue: 7:00am – 7:00pm</p>
+                <p>Vie: 7:00am – 7:00pm</p>
+                <p>Sáb: 7:00am – 3:00pm</p>
+                <p>Dom: Cerrado, innovando para ti.</p>
+            </div>
+        </div>
+        <div style="padding-left: 45px; float: right; width: 50%; text-align: justify;">
+            <p class="textSubTitulo" style="color:rgb(20, 24, 137);">CONTÁCTENOS: </p>
+
+            <form name="formulario" method="post" action="/send.php">
+                <a>Su nombre (obligatorio)</a>
+                <p><input style="width: 295px;" type="text" name="nombre" required/></p>
+
+                <a>Su correo electrónico (obligatorio)</a>
+                <p><input style="width: 295px;" type="email" name="correo" required/></p>
+
+                <a>Asunto </a>
+                <p><input style="width: 295px;" type="text" name="asunto" /></p>
+
+                <a>Su mensaje</a>
+                <p><textarea cols="40" rows="10" name="comentario"></textarea></p>
+
+                <input type="submit" value="Enviar" />
+            </form>
+        </div>
+    </div>
+</div>

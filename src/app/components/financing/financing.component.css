@@ -1,0 +1,12 @@
+.imgFinance {
+    float: right;
+    width: 350px;
+    height: 150px;
+    margin-left: 40px;
+    margin-top: -20px;
+}
+
+.textTitle {
+    margin-top: 30px;
+    color: rgb(20, 24, 137);
+}

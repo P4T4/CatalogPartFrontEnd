@@ -1,0 +1,75 @@
+<div flex class="custom-title-header">
+    <h1>Ventas pendientes</h1>
+</div>
+<div layout="row" layout-wrap>
+    <!-- WHEN EXISTS DATA -->
+    <!-- FORM FILTER -->
+    <div fxLayout fxLayoutAlign="center center">
+        <mat-form-field appearance="outline" fxFlex="100%">
+            <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filtro global...">
+        </mat-form-field>
+    </div>
+    <!-- TABLE -->
+    <div flex class="mt-4">
+        <div class="mat-elevation-z8">
+            <table style="width: 100%;" mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+
+                <!-- <ng-container matColumnDef="productId">
+                    <th mat-header-cell *matHeaderCellDef>
+                        <mat-checkbox (change)="$event ? masterToggle() : null"
+                            [checked]="selection.hasValue() && isAllSelected()"
+                            [indeterminate]="selection.hasValue() && !isAllSelected()">
+                        </mat-checkbox>
+                    </th>
+                    <td mat-cell *matCellDef="let adminProduct">
+                        <mat-checkbox (click)="$event.stopPropagation()" (change)="individualSelection(adminProduct)"
+                            [checked]="selection.isSelected(adminProduct)">
+                        </mat-checkbox>
+                    </td>
+                </ng-container> -->
+
+                <ng-container matColumnDef="numberOrder">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Código referencia </th>
+                    <td mat-cell *matCellDef="let adminProduct"> {{adminProduct.numberOrder}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="createdDate">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de creación </th>
+                    <td mat-cell *matCellDef="let adminProduct"> {{adminProduct.createdDate}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="subTotal">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Subtotal </th>
+                    <td mat-cell *matCellDef="let adminProduct"> {{adminProduct.subTotal | currency}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="taxValue">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Impuesto </th>
+                    <td mat-cell *matCellDef="let adminProduct"> {{adminProduct.taxValue | currency}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="discountValue">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Descuento </th>
+                    <td mat-cell *matCellDef="let adminProduct"> {{adminProduct.discountValue ? 'Activo' : 'Inactivo'}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="total">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Total </th>
+                    <td mat-cell *matCellDef="let adminProduct"> {{adminProduct.total | currency}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="transactionState">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+                    <td mat-cell *matCellDef="let adminProduct">
+                        <button (click)="openDialog(adminProduct)" type="button" mat-raised-button
+                            color="primary">Pedido</button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+                <tr mat-row *matRowDef="let row; columns: columnas;"></tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+        </div>
+    </div>

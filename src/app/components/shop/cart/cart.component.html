@@ -1,0 +1,84 @@
+<div class="margin-333">
+    <h2 class="custom-title-header">Carrito de compras</h2>
+    <table class="cart-table default-bg mat-elevation-z1" *ngIf="productList.length"
+        [@animate]="{value:'*',params:{delay: '100ms', x:'-50px'}}">
+        <thead>
+            <tr>
+                <th class="text-muted">Eliminar</th>
+                <th class="text-muted">Miniatura</th>
+                <th class="text-muted">Producto</th>
+                <th class="text-muted">Precio</th>
+                <!-- <th class="text-muted">Precio IVA unitario</th> -->
+                <th class="text-muted">Cantidad</th>
+                <th class="text-muted">Sub Total</th>
+                <th class="text-muted">IVA</th>
+                <th class="text-muted">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of productList">
+                <td>
+                    <button mat-icon-button color="warn"
+                        (click)="removeProductCar(product.productId, product.quantity)">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </td>
+                <td>
+                    <img class="cart-thumbnail" src="assets/images/mock-logo-1.png" style="cursor: pointer"
+                        [routerLink]="['/detproducto', product.productId]">
+                </td>
+                <td>
+                    <span style="cursor: pointer"
+                        [routerLink]="['/detproducto', product.productId]">{{product.productName}}</span>
+                </td>
+                <td>{{product.unitPrice | currency}}</td>
+                <!-- <td>{{product.taxValueProduct| currency}}</td> -->
+                <td>
+                    <input class="quantity-input default-bg" id="quantity" min="1" name="quantity" type="number"
+                        (change)="onQuantityChangeProduct(product.productId, product.quantity, product.unitPrice)"
+                        [(ngModel)]="product.quantity">
+                </td>
+                <td>{{product.unitPrice * product.quantity | currency}}</td>
+                <td>{{ product.taxValueProduct | currency }}</td>
+                <td>{{product.unitPrice * product.quantity | currency}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div fxLayout="row" fxLayout.lt-md="column" *ngIf="productList.length"
+        [@animate]="{value:'*',params:{delay: '100ms', x:'50px'}}">
+        <div fxFlex></div>
+        <div fxFlex="30">
+            <mat-card class="m-0">
+                <div class="line mb-1">
+                    <span class="fw-500">Subtotal:</span>
+                    <span fxFlex></span>
+                    <span class="text-muted">{{subTotal| currency}}</span>
+                </div>
+                <!-- <div class="line mb-1">
+                    <span class="fw-500">VAT:</span>
+                    <span fxFlex></span>
+                    <span class="text-muted">{{vat}}%</span>
+                </div>-->
+                <!--<mat-divider class=""></mat-divider>
+                <div class="line mb-1 pt-1">
+                    <span class="fw-500">Total:</span>
+                    <span fxFlex></span>
+                    <span class="text-muted">${{total}}</span>
+                </div>-->
+                <mat-card-actions>
+                    <span fxFlex></span>
+                    <!--<button mat-raised-button color="primary" routerLink="/catalogo">Regresa a comprar</button>-->
+                    <button mat-raised-button color="primary" (click)="saveChange()">Guardar Cambios</button>
+                    <button mat-raised-button color="warn" routerLink="/shop/checkout">Checkout</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+    <div *ngIf="!productList.length" [@animate]="{value:'*',params:{delay: '100ms', y:'-50px'}}">
+        <mat-card class="text-center">
+            <p>Tu carro está vacio</p>
+            <button mat-raised-button color="accent" routerLink="/catalogo">Regresa a comprar</button>
+        </mat-card>
+    </div>
+</div>

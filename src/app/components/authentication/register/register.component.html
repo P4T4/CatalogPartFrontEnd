@@ -1,0 +1,206 @@
+<div [perfectScrollbar]="{}" class="height-100vh signup4-wrap" fxLayout="row wrap" fxLayoutAlign="center center">
+    <div class="signup4-container mat-elevation-z4 white" fxLayout="row wrap" fxLayout.xs="column"
+        fxLayoutAlign="start stretch" fxFlex="80" fxFlex.xs="94" fxFlex.sm="80"
+        [@animate]="{value:'*',params:{y:'40px',opacity:'0',delay:'100ms', duration: '400ms'}}">
+
+        <div fxLayout="column" fxLayoutAlign="center center" class="signup4-header" fxFlex="30">
+            <div class="" fxLayout="row wrap" fxLayoutAlign="center center">
+                <img width="900px" src="assets/images/Molina_Compani_Black.png" alt="" style="cursor: pointer"
+                    title="Inicio" routerLink="/inicio">
+            </div>
+        </div>
+
+        <div fxFlex="70" fxLayout="row wrap" fxLayoutAlign="center center">
+
+            <div class="content-card default-bg">
+                <mat-tab-group (focusChange)="handleMatTabChange($event)">
+                    <mat-tab label="Persona Natural">
+                        <form (ngSubmit)="createUser(formu)" #formu="ngForm" class="signup4-form grey-100 text-center w100">
+
+                            <mat-form-field class="cajas" appearance="outline">
+                                <mat-label>Nombre Completo</mat-label>
+                                <input matInput class="form-control" [(ngModel)]="entityUser.name" name="name"
+                                    [class.is-invalid]="name.invalid && name.touched" required autocomplete="off"
+                                    #name="ngModel" pattern="^[a-zA-Z\s]+$" />
+                                <small *ngIf="name.invalid && name.touched" class="form-text text-danger">El nombres es
+                                    obligatorio.</small>
+                                <small *ngIf="name.invalid && name.errors?.pattern" class="form-text text-danger">El
+                                    nombre contener solo letras.</small>
+                            </mat-form-field>
+
+                            <mat-form-field class="cajas" appearance="outline">
+                                <mat-label>Correo electrónico</mat-label>
+                                <input matInput type="email" class="form-control" [(ngModel)]="entityUser.email"
+                                    name="email" [class.is-invalid]="email.invalid && email.touched" required
+                                    autocomplete="off" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                                    #email="ngModel" />
+                                <small *ngIf="email.invalid && email.touched" class="form-text text-danger">El correo
+                                    electrónico es obligatorio.</small>
+                                <small *ngIf="email.invalid && email.errors?.pattern" class="form-text text-danger">El
+                                    correo debe cumplir con la estructura.</small>
+                            </mat-form-field>
+                            <div style="display: flex;justify-content: center;">
+                                <mat-slide-toggle
+                                    matTooltip="Antes de aceptar tiene que revisar los terminos y condiciones"
+                                    [disabled]="openModalTyC" color="primary" [(ngModel)]="check" name="checkTerms"
+                                    #checkTerms="ngModel">
+                                    Al continuar acepto los&nbsp;
+                                </mat-slide-toggle>
+                                <span matTooltip="Abrir los terminos y condiciones" matTooltipPosition="above"
+                                    (click)="openDialog($event)" style="text-decoration: underline;">
+                                    Términos y Condiciones
+                                </span>
+                            </div>
+
+                            <div fxLayout="row wrap" fxLayoutAlign="center" style="margin-top: 20px;">
+                                <button class="button" mat-flat-button color="primary"
+                                    [disabled]="!formu.valid || !check" type="submit">Registro</button>
+                                <button class="button" mat-flat-button color="gray" routerLink="/auth/login"
+                                    type="button">Iniciar Sesión</button>
+                            </div>
+                        </form>
+                    </mat-tab>
+                    <mat-tab label="Empresas">
+                        <form (ngSubmit)="createBusiness(forma)" #forma="ngForm" class="signup4-form grey-100">
+                            <div class="height-100vh-290px">
+
+                                <div fxLayout="row wrap" class="divContainer">
+
+                                    <div fxFlex="100" style="padding: 8px;" fxFlex.gt-sm="50" fxFlex.sm="50">
+
+                                        <mat-form-field class="full-width" appearance="outline">
+                                            <mat-label>Número de identificación</mat-label>
+                                            <input matInput class="form-control"
+                                                [(ngModel)]="entityEnterprise.identificationNumber"
+                                                name="mumberIdentification" pattern="^[0-9]+$"
+                                                [class.is-invalid]="mumberIdentification.invalid && mumberIdentification.touched"
+                                                required autocomplete="off" #mumberIdentification="ngModel" />
+                                            <small *ngIf="mumberIdentification.invalid && mumberIdentification.touched"
+                                                class="form-text text-danger">El numero de identificación es
+                                                obligatorio.</small>
+                                            <small
+                                                *ngIf="mumberIdentification.invalid && mumberIdentification.errors?.pattern"
+                                                class="form-text text-danger">El
+                                                número de identificación debe contener solo números.</small>
+                                        </mat-form-field>
+
+                                        <mat-form-field class="full-width" appearance="outline">
+                                            <mat-label>Nombre empresa</mat-label>
+                                            <input matInput class="form-control"
+                                                [(ngModel)]="entityEnterprise.businessName" name="nameBusiness"
+                                                [class.is-invalid]="nameBusiness.invalid && nameBusiness.touched"
+                                                pattern="^[a-zA-Z\s]+$" required autocomplete="off"
+                                                #nameBusiness="ngModel" />
+                                            <small *ngIf="nameBusiness.invalid && nameBusiness.touched"
+                                                class="form-text text-danger">El nombre de la empresa es
+                                                obligatorio.</small>
+                                            <small *ngIf="nameBusiness.invalid && nameBusiness.errors?.pattern"
+                                                class="form-text text-danger">El
+                                                nombre de la empresa debe contener solo letras.</small>
+                                        </mat-form-field>
+
+                                        <mat-form-field class="full-width" appearance="outline">
+                                            <mat-label>Ciudad</mat-label>
+                                            <input matInput class="form-control" pattern="^[a-zA-Z\s]+$"
+                                                [(ngModel)]="entityEnterprise.businessCity" name="cityBusiness"
+                                                [class.is-invalid]="cityBusiness.invalid && cityBusiness.touched"
+                                                required autocomplete="off" #cityBusiness="ngModel" />
+                                            <small *ngIf="cityBusiness.invalid && cityBusiness.touched"
+                                                class="form-text text-danger">La ciudad es obligatorio.</small>
+                                            <small *ngIf="cityBusiness.invalid && cityBusiness.errors?.pattern"
+                                                class="form-text text-danger">La
+                                                ciudad debe contener solo letras.</small>
+                                        </mat-form-field>
+
+                                        <mat-form-field class="full-width" appearance="outline">
+                                            <mat-label>Correo persona de contacto</mat-label>
+                                            <input matInput class="form-control"
+                                                [(ngModel)]="entityEnterprise.contactPersonEmail"
+                                                name="mailContactPerson"
+                                                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                                                [class.is-invalid]="mailContactPerson.invalid && mailContactPerson.touched"
+                                                required autocomplete="off" #mailContactPerson="ngModel" />
+                                            <small *ngIf="mailContactPerson.invalid && mailContactPerson.touched"
+                                                class="form-text text-danger">El correo persona de contacto es
+                                                obligatorio.</small>
+                                            <small
+                                                *ngIf="mailContactPerson.invalid && mailContactPerson.errors?.pattern"
+                                                class="form-text text-danger">El correo persona de contacto debe
+                                                contener ser solo letras.</small>
+                                        </mat-form-field>
+
+                                    </div>
+
+                                    <div fxFlex="100" style="padding: 8px;" fxFlex.gt-sm="50" fxFlex.sm="50">
+
+                                        <mat-form-field class="full-width" appearance="outline">
+                                            <mat-label>Dirección</mat-label>
+                                            <input matInput class="form-control"
+                                                [(ngModel)]="entityEnterprise.businessAdress" name="adressBusiness"
+                                                [class.is-invalid]="adressBusiness.invalid && adressBusiness.touched"
+                                                required autocomplete="off" #adressBusiness="ngModel" />
+                                            <small *ngIf="adressBusiness.invalid && adressBusiness.touched"
+                                                class="form-text text-danger">La dirección es obligatoria.</small>
+                                        </mat-form-field>
+
+                                        <mat-form-field class="full-width" appearance="outline">
+                                            <mat-label>Teléfono</mat-label>
+                                            <input matInput class="form-control" pattern="^[0-9]+$"
+                                                [(ngModel)]="entityEnterprise.businessPhone" name="phoneBusiness"
+                                                [class.is-invalid]="phoneBusiness.invalid && phoneBusiness.touched"
+                                                required autocomplete="off" #phoneBusiness="ngModel" />
+                                            <small *ngIf="phoneBusiness.invalid && phoneBusiness.touched"
+                                                class="form-text text-danger">El teléfono es obligatorio.</small>
+                                            <small *ngIf="phoneBusiness.invalid && phoneBusiness.errors?.pattern"
+                                                class="form-text text-danger">El
+                                                teléfono debe contener solo números.</small>
+                                        </mat-form-field>
+
+                                        <mat-form-field class="full-width" appearance="outline">
+                                            <mat-label>Nombre persona de contacto</mat-label>
+                                            <input matInput class="form-control" pattern="^[a-zA-Z\s]+$"
+                                                [(ngModel)]="entityEnterprise.contactPersonName"
+                                                name="nameContactPerson"
+                                                [class.is-invalid]="nameContactPerson.invalid && nameContactPerson.touched"
+                                                required autocomplete="off" #nameContactPerson="ngModel" />
+                                            <small *ngIf="nameContactPerson.invalid && nameContactPerson.touched"
+                                                class="form-text text-danger">El nombre persona de contacto es
+                                                obligatorio.</small>
+                                            <small
+                                                *ngIf="nameContactPerson.invalid && nameContactPerson.errors?.pattern"
+                                                class="form-text text-danger">El nombre persona de contacto debe
+                                                contener ser solo letras.</small>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+
+                                <div fxLayout="row wrap" class="divContainer">
+                                    <div fxFlex="100" fxFlex.gt-sm="100" fxFlex.sm="-10">
+                                        <div style="display: flex;">
+                                            <mat-slide-toggle
+                                                matTooltip="Antes de aceptar tiene que revisar los terminos y condiciones"
+                                                [disabled]="openModalTyC" color="primary" [(ngModel)]="terminos"
+                                                name="terminosCondi" #terminosCondi="ngModel">
+                                                Al continuar acepto los&nbsp;
+                                            </mat-slide-toggle>
+                                            <span (click)="openDialog($event)" style="text-decoration: underline;">
+                                                Términos y Condiciones
+                                            </span>
+                                        </div>
+                                        <div fxLayout="row wrap" fxLayoutAlign="center">
+                                            <button class="button" mat-flat-button color="primary"
+                                                [disabled]="!forma.valid || !terminos" type="submit">Registro</button>
+                                            <button class="button" mat-flat-button color="gray" routerLink="/auth/login"
+                                                type="button">Iniciar Sesión</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+                    </mat-tab>
+                </mat-tab-group>
+            </div>
+        </div>
+    </div>
+</div>

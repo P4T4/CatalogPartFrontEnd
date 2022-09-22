@@ -1,0 +1,43 @@
+<div *ngIf="!frame" class="page-layout overflow-hidden pb-8">
+    <!-- header background -->
+    <div class="custom-title-header">
+        <h1>Selecciona una marca:</h1>
+    </div>
+    <div class="content divConta">
+        <!-- Body card -->
+        <div class="content-body">
+            <!-- body card toolbar -->
+            <div class="content-card default-bg">
+
+                <!-- body content -->
+                <div class="card-body p-24 body">
+                    <div fxLayout="row wrap" *ngIf="content && !frame">
+                        <div fxFlex="100" fxFlex.gt-sm="25" fxFlex.sm="50" *ngFor="let mark of tradeMarkList">
+                            <mat-card class="default">
+                                <div class="divImg">
+                                    <h4><b>{{mark.tradeMarkName}}</b></h4>
+                                    <img [src]="convertBase64toUrl(mark.tradeMarkImage64)" class="imgMark" title="Marca" (click)="viewModel(mark.tradeMarkId, mark.isExternalFrame, mark.codeExternalFrame)" />
+                                </div>
+                            </mat-card>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<h1 *ngIf="!frame" class="divContainer">Seleccione una marca: </h1>
+<div fxLayout="row wrap" class="divContainer" *ngIf="content && !frame">
+    <div fxFlex="100" fxFlex.gt-sm="25" fxFlex.sm="50" *ngFor="let mark of tradeMarkList">
+        <mat-card class="default">
+            <div class="divImg">
+                <h4><b>{{mark.tradeMarkName}}</b></h4>
+                <img [src]="convertBase64toUrl(mark.tradeMarkImage64)" class="imgMark" title="Marca" (click)="viewModel(mark.tradeMarkId, mark.isExternalFrame, mark.codeExternalFrame)" />
+            </div>
+        </mat-card>
+    </div>
+</div>-->
+<div *ngIf="frame">
+    <button mat-icon-button class="text-muted" (click)="Back()"><mat-icon>chevron_left</mat-icon> <span>Regresar</span></button>
+    <iframe id="cp_frame" name="cp_frame" [src]="frameView | safe" onload="FrameManager.registerFrame(this)" scrolling="no" frameborder="0" marginheight="0" marginwidth="0" width="100%"> </iframe>
+</div>

@@ -1,0 +1,70 @@
+<div>
+    <div class="custom-title-header" flex>
+        <h1>Administrar empresas</h1>
+    </div>
+    <!-- BUTTONS -->
+    <div flex>
+        <button *ngIf="!hasSelectedChecked" mat-raised-button class="mb-05" color="primary" (click)="openPopUp({}, true)">Nueva
+            Empresa</button>
+        <button *ngIf="hasSelectedChecked" mat-raised-button (click)="openPopUp(selection, false)">Editar</button>
+        <!-- FALTA: Ver usuarios relacionados -->
+    </div>
+    <!-- FILTERS -->
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div fxFlex="100%">
+            <mat-form-field appearance="outline" fxFlex="100%">
+                <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filtro global...">
+            </mat-form-field>
+        </div>
+    </div>
+    <!-- TABLE -->
+    <div flex class="mt-4">
+        <div class="mat-elevation-z8">
+            <mat-table [dataSource]="dataSource" matSort>
+                <ng-container matColumnDef="action">
+                    <mat-header-cell *matHeaderCellDef class="tableHead">Acciones </mat-header-cell>
+                    <mat-cell *matCellDef="let row" class="tableBody">
+                        <mat-slide-toggle color="primary" (click)="$event.stopPropagation()"
+                            (change)="individualSelection(row, $event)" [checked]="selection.isSelected(row)">
+                        </mat-slide-toggle>
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="identificationNumber">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header class="tableHead"> N°
+                        Identificación </mat-header-cell>
+                    <mat-cell *matCellDef="let row" data-label="referencia" class="tableBody">
+                        {{row.identificationNumber}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="businessName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header class="tableHead"> Nombre
+                    </mat-header-cell>
+                    <mat-cell center *matCellDef="let row" data-label="descripcion" class="tableBody">
+                        {{row.businessName}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="businessCity">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header class="tableHead"> Ciudad
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let row" data-label="precio" class="tableBody">
+                        {{row.businessCity}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="businessPhone">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header class="tableHead"> Teléfono
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let row" data-label="precio" class="tableBody">
+                        {{row.businessPhone}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="isRegister">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header class="tableHead"> Registro
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let row" data-label="precio" class="tableBody">
+                        {{row.isRegister? 'Activo': 'Inactivo'}} </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;">
+                </mat-row>
+            </mat-table>
+            <mat-paginator [pageSizeOptions]="[10, 20, 30]"></mat-paginator>
+        </div>
+    </div>
+</div>

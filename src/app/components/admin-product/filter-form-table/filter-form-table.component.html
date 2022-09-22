@@ -1,0 +1,40 @@
+<div fxLayout="row wrap" class="mt-12" [formGroup]="filterFormTableGroupForm" style="text-align: center;">
+    <div fxFlex="40">
+        <mat-form-field appearance="outline" style="width: 90%;" *ngIf="tradeMarkList.length > 0; else withouthTrades">
+            <mat-label>Marca</mat-label>
+            <mat-select (selectionChange)="onChangeTradeMark($event)" formControlName="tradeMarkId" ngDefaultControl
+                matInput>
+                <mat-option *ngFor="let tradeMark of tradeMarkList" [value]="tradeMark.tradeMarkId">
+                    {{tradeMark.tradeMarkName}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="tradeMarkId.invalid">
+                El campo marca es requerido
+            </mat-error>
+        </mat-form-field>
+        <ng-template #withouthTrades>
+            Sin Marcas
+        </ng-template>
+    </div>
+    <div fxFlex="40">
+        <mat-form-field appearance="outline" style="width: 90%;"
+            *ngIf="referenceTradeMarkList.length > 0; else withouthReferencesTrades">
+            <mat-label>Referencia</mat-label>
+            <mat-select formControlName="referenceTradeMarkId" ngDefaultControl matInput>
+                <mat-option *ngFor="let referencetradeMark of referenceTradeMarkList"
+                    [value]="referencetradeMark.referenceTradeMarkId">
+                    {{referencetradeMark.referenceName}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="referenceTradeMarkId.invalid">
+                El campo referencia es requerido
+            </mat-error>
+        </mat-form-field>
+        <ng-template #withouthReferencesTrades>
+            Sin Marcas
+        </ng-template>
+    </div>
+    <div fxFlex="20">
+        <button mat-raised-button type="submit" color="primary" (click)="onSubmit()">Consultar</button>
+    </div>
+</div>

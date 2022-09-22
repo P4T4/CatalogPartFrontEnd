@@ -1,0 +1,151 @@
+<h1 matDialogTitle>{{data.title}}</h1>
+<!-- FALTA AGREGAR MENSAJES DE LAS EXPRESIONES REGULARES -->
+<mat-dialog-content>
+    <form [formGroup]="bussinessForm" fxLayout="row wrap" fxLayout.xs="column" (ngSubmit)="onSubmit()">
+        <h3 fxFlex="100">Empresa</h3>
+        <div fxFlex="50">
+            <mat-form-field appearance="outline" style="width: 90%;">
+                <mat-label>Nombre o Razón social</mat-label>
+                <input formControlName="businessName" pattern="^[a-zA-Z0-9\s]+$" ngDefaultControl matInput
+                    placeholder="Digite...">
+                <mat-error *ngIf="businessName.invalid">
+                    El campo es requerido
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div fxFlex="50" *ngIf="identificationNumberCompany">
+            <mat-form-field appearance="outline" style="width: 90%;">
+                <mat-label>Nit</mat-label>
+                <!-- <input [value]="identificationNumberCompany" matInput [disabled]="true"> -->
+                <input formControlName="identificationNumberCompany" pattern="^[0-9\-]+$" ngDefaultControl matInput
+                    placeholder="Digite...">
+                <mat-error *ngIf="identificationNumberCompany.invalid">
+                    El campo es requerido
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <ng-container *ngIf="currentUser?.typeUser == 1">
+            <div fxFlex="50">
+                <mat-slide-toggle formControlName="isActive" color="primary" name="terminosCondi">Registro {{
+                    isActive.value
+                    ?
+                    'Activo':'Inactivo' }}
+                </mat-slide-toggle>
+            </div>
+        </ng-container>
+        <div fxFlex="50">
+            <mat-form-field appearance="outline" style="width: 90%;">
+                <mat-label>Ciudad empresa</mat-label>
+                <input formControlName="businessCity" ngDefaultControl pattern="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" matInput
+                    placeholder="Digite...">
+                <mat-error *ngIf="businessCity.invalid">
+                    El campo es requerido
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div fxFlex="50">
+            <mat-form-field appearance="outline" style="width: 90%;">
+                <mat-label>Dirección empresa</mat-label>
+                <input formControlName="businessAdress" ngDefaultControl matInput placeholder="Digite...">
+                <mat-error *ngIf="businessAdress.invalid">
+                    El campo es requerido
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div fxFlex="50">
+            <mat-form-field appearance="outline" style="width: 90%;">
+                <mat-label>Telefono empresa</mat-label>
+                <input type="number" formControlName="businessPhone" pattern="^[0-9\(\)\+]+$" ngDefaultControl matInput
+                    placeholder="Digite...">
+                <mat-error *ngIf="businessPhone.invalid">
+                    El campo es requerido
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <ng-container *ngIf="currentUser?.typeUser == 1">
+            <div fxFlex="50">
+                <mat-form-field appearance="outline" style="width: 90%;">
+                    <mat-label>Número vendedor atiende</mat-label>
+                    <input type="number" formControlName="contactSellerLink" pattern="^[0-9]+$" ngDefaultControl
+                        matInput placeholder="Digite...">
+                    <mat-error *ngIf="contactSellerLink.invalid">
+                        El campo es requerido
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div fxFlex="50">
+                <mat-form-field appearance="outline" style="width: 90%;">
+                    <mat-label>Porcentaje incremento de precio</mat-label>
+                    <input type="number" formControlName="priceIncreasePercentageValue" pattern="^[0-9]+$"
+                        ngDefaultControl matInput placeholder="porcentaje incremento de precio">
+                    <mat-error *ngIf="priceIncreasePercentageValue.invalid">
+                        El campo es requerido
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </ng-container>
+        <mat-divider></mat-divider>
+        <h3 fxFlex="100">Usuario</h3>
+        <div fxFlex="50">
+            <mat-form-field appearance="outline" style="width: 90%;">
+                <mat-label>Nombre Persona</mat-label>
+                <input formControlName="name" ngDefaultControl pattern="^[a-zA-Z\s]+$" matInput placeholder="Digite...">
+                <mat-error *ngIf="name.invalid">
+                    El campo es requerido
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div fxFlex="50">
+            <mat-form-field appearance="outline" style="width: 90%;">
+                <mat-label>Correo</mat-label>
+                <input formControlName="email" ngDefaultControl pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                    matInput placeholder="Digite...">
+                <mat-error *ngIf="email.invalid">
+                    El campo es requerido
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div fxFlex="50">
+            <mat-form-field appearance="outline" style="width: 90%;">
+                <mat-label>Número de identificación</mat-label>
+                <input formControlName="identificationNumber" ngDefaultControl pattern="^[0-9]+$" matInput
+                    placeholder="Digite...">
+                <mat-error *ngIf="identificationNumber.invalid">
+                    El campo es requerido
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div fxFlex="50">
+            <mat-form-field appearance="outline" style="width: 90%;">
+                <mat-label>Ciudad</mat-label>
+                <input formControlName="city" ngDefaultControl matInput pattern="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" placeholder="Digite...">
+                <mat-error *ngIf="city.invalid">
+                    El campo es requerido
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div fxFlex="50">
+            <mat-form-field appearance="outline" style="width: 90%;">
+                <mat-label>Dirección</mat-label>
+                <input formControlName="address" ngDefaultControl matInput placeholder="Digite...">
+                <mat-error *ngIf="address.invalid">
+                    El campo es requerido
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div fxFlex="50">
+            <mat-form-field appearance="outline" style="width: 90%;">
+                <mat-label>Telefono</mat-label>
+                <input formControlName="phone" ngDefaultControl pattern="^[0-9]+$" matInput placeholder="Digite...">
+                <mat-error *ngIf="phone.invalid">
+                    El campo es requerido
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div fxFlex="100" class="mt-1">
+            <button type="submit" mat-raised-button color="primary" [disabled]="bussinessForm.invalid">Guardar</button>
+            <span fxFlex></span>
+            <button mat-button color="warn" type="button" (click)="dialogRef.close(false)">Cancel</button>
+        </div>
+    </form>
+</mat-dialog-content>

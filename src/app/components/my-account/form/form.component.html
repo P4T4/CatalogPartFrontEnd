@@ -1,0 +1,61 @@
+<h1 mat-dialog-title>Mi cuenta {{ currentUser.name }}</h1>
+<form [formGroup]="myAccount" fxLayout="row wrap" fxLayout.xs="column" (ngSubmit)="onSubmit()">
+    <div fxFlex="50">
+        <mat-form-field appearance="outline" style="width: 90%;">
+            <mat-label>Nombre</mat-label>
+            <input formControlName="name" ngDefaultControl matInput placeholder="Digite nuevo nombre">
+            <mat-error *ngIf="name.invalid">
+                El campo nombre es requerido
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div fxFlex="50">
+        <mat-form-field appearance="outline" style="width: 90%;">
+            <mat-label>Email</mat-label>
+            <input ngDefaultControl matInput [value]="email" [disabled]="true">
+            <!-- <mat-error *ngIf="email.invalid">
+                El campo email es requerido
+            </mat-error> -->
+        </mat-form-field>
+    </div>
+    <div fxFlex="50">
+        <mat-form-field appearance="outline" style="width: 90%;">
+            <mat-label>Número identificación</mat-label>
+            <input formControlName="identificationNumber" ngDefaultControl matInput placeholder="Digite...">
+            <mat-error *ngIf="identificationNumber.invalid">
+                El campo es requerido
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div fxFlex="50">
+        <mat-form-field appearance="outline" style="width: 90%;">
+            <mat-label>Ciudad</mat-label>
+            <input formControlName="city" ngDefaultControl matInput placeholder="Digite...">
+            <mat-error *ngIf="city.invalid">
+                El campo city es requerido
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div fxFlex="50">
+        <mat-form-field appearance="outline" style="width: 90%;">
+            <mat-label>Dirección</mat-label>
+            <input formControlName="address" ngDefaultControl matInput placeholder="Digite...">
+            <mat-error *ngIf="address.invalid">
+                El campo es requerido
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div fxFlex="50">
+        <mat-form-field appearance="outline" style="width: 90%;">
+            <mat-label>Telefono</mat-label>
+            <input formControlName="phone" ngDefaultControl matInput placeholder="Digite...">
+            <mat-error *ngIf="phone.invalid">
+                El campo es requerido
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div fxFlex="100">
+        <button type="submit" mat-raised-button color="primary" [disabled]="myAccount.invalid">Actualizar
+            usuario</button>
+    </div>
+</form>

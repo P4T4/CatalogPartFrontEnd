@@ -1,0 +1,118 @@
+<h1 mat-dialog-title>Mi cuenta {{ currentCompany?.businessName }}</h1>
+<form [formGroup]="myBussinessAccount" fxLayout="row wrap" fxLayout.xs="column" (ngSubmit)="onSubmit()">
+    <h3 fxFlex="100">Empresa</h3>
+    <div fxFlex="50">
+        <mat-form-field appearance="outline" style="width: 90%;">
+            <mat-label>Nombre o Razón social</mat-label>
+            <input formControlName="businessName" ngDefaultControl matInput placeholder="Digite nuevo nombre">
+            <mat-error *ngIf="businessName.invalid">
+                El campo es requerido
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div fxFlex="50">
+        <mat-form-field appearance="outline" style="width: 90%;">
+            <mat-label>Nit</mat-label>
+            <input [value]="identificationNumberCompany" matInput [disabled]="true">
+            <!-- <mat-error *ngIf="identificationNumber.invalid">
+                El campo es requerido
+            </mat-error> -->
+        </mat-form-field>
+    </div>
+    <ng-container *ngIf="currentUser?.typeUser == 1">
+        <div fxFlex="50">
+            <mat-slide-toggle formControlName="isActive" color="primary" name="terminosCondi">Registro {{ isActive.value
+                ?
+                'Activo':'Inactivo' }}
+            </mat-slide-toggle>
+        </div>
+    </ng-container>
+    <div fxFlex="50">
+        <mat-form-field appearance="outline" style="width: 90%;">
+            <mat-label>Ciudad empresa</mat-label>
+            <input formControlName="businessCity" ngDefaultControl matInput placeholder="Digite nuevo nombre">
+            <mat-error *ngIf="businessCity.invalid">
+                El campo es requerido
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div fxFlex="50">
+        <mat-form-field appearance="outline" style="width: 90%;">
+            <mat-label>Dirección empresa</mat-label>
+            <input formControlName="businessAdress" ngDefaultControl matInput placeholder="Digite nuevo nombre">
+            <mat-error *ngIf="businessAdress.invalid">
+                El campo es requerido
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div fxFlex="50">
+        <mat-form-field appearance="outline" style="width: 90%;">
+            <mat-label>Telefono empresa</mat-label>
+            <input type="number" formControlName="businessPhone" ngDefaultControl matInput
+                placeholder="Digite nuevo nombre">
+            <mat-error *ngIf="businessPhone.invalid">
+                El campo es requerido
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <mat-divider></mat-divider>
+    <h3 fxFlex="100">Usuario</h3>
+    <div fxFlex="50">
+        <mat-form-field appearance="outline" style="width: 90%;">
+            <mat-label>Nombre Persona</mat-label>
+            <input formControlName="name" ngDefaultControl matInput placeholder="Digite nuevo nombre">
+            <mat-error *ngIf="name.invalid">
+                El campo es requerido
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div fxFlex="50">
+        <mat-form-field appearance="outline" style="width: 90%;">
+            <mat-label>Correo</mat-label>
+            <input formControlName="email" ngDefaultControl matInput placeholder="Digite nuevo nombre">
+            <mat-error *ngIf="email.invalid">
+                El campo es requerido
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div fxFlex="50">
+        <mat-form-field appearance="outline" style="width: 90%;">
+            <mat-label>Número de identificación</mat-label>
+            <input formControlName="identificationNumber" ngDefaultControl matInput placeholder="Digite nuevo nombre">
+            <mat-error *ngIf="identificationNumber.invalid">
+                El campo es requerido
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div fxFlex="50">
+        <mat-form-field appearance="outline" style="width: 90%;">
+            <mat-label>Ciudad</mat-label>
+            <input formControlName="city" ngDefaultControl matInput placeholder="Digite nuevo nombre">
+            <mat-error *ngIf="city.invalid">
+                El campo es requerido
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div fxFlex="50">
+        <mat-form-field appearance="outline" style="width: 90%;">
+            <mat-label>Dirección</mat-label>
+            <input formControlName="address" ngDefaultControl matInput placeholder="Digite nuevo nombre">
+            <mat-error *ngIf="address.invalid">
+                El campo es requerido
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div fxFlex="50">
+        <mat-form-field appearance="outline" style="width: 90%;">
+            <mat-label>Telefono</mat-label>
+            <input formControlName="phone" ngDefaultControl matInput placeholder="Digite nuevo nombre">
+            <mat-error *ngIf="phone.invalid">
+                El campo es requerido
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div fxFlex="100" class="mb-12">
+        <button type="submit" mat-raised-button color="primary" [disabled]="myBussinessAccount.invalid">Actualizar
+            usuario</button>
+    </div>
+</form>

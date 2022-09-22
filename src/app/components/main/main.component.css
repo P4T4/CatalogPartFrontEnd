@@ -1,0 +1,115 @@
+.divCarrousel {
+    height: 620px;
+}
+
+.imgTam {
+    height: 620px;
+}
+
+.codh1 {
+    color: white;
+    font-size: 65px;
+    font-weight: bold;
+}
+
+.codh2 {
+    color: white;
+    font-size: 65px;
+    font-family: system-ui;
+}
+
+.textSpan {
+    color: yellow;
+    font-weight: normal;
+    font-family: system-ui;
+}
+
+.textSpanB {
+    color: blue;
+    font-weight: normal;
+    font-family: system-ui;
+}
+
+.textSpanN {
+    color: orangered;
+    font-weight: normal;
+    font-family: system-ui;
+}
+
+.carousel-caption {
+    position: absolute;
+    right: 10%;
+    top: 78px;
+    /* Cambiar bottom por top y los píxeles que necesites */
+    left: 3%;
+    z-index: 10;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: #fff;
+    text-align: left;
+    font-family: fantasy;
+    /*background-color: rgba(0, 0, 0, 0.5);*/
+    /* Añadir para conseguir el fondo con opacidad */
+}
+
+.divTitle {
+    margin-top: 50px;
+    margin-bottom: 38px;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+.textTitle {
+    text-align: center;
+    background: rgb(248, 243, 243);
+    font-weight: bold;
+    height: 180px;
+    padding: 80px;
+    font-size: 25px;
+    margin-top: 50px;
+}
+
+.divTam {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.textSub {
+    color: rgb(5, 5, 143);
+    text-align: center;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.tamIcon {
+    text-align: center;
+    font-size: 150px;
+    width: 155px;
+    height: 155px;
+}
+
+.tamIconBanner {
+    text-align: center;
+    font-size: 115px;
+    width: 110px;
+    height: 110px;
+}
+
+.imgRound {
+    width: 230px;
+    height: 210px;
+    border-radius: 50%;
+}
+
+.caHover:hover {
+    color: rgb(5, 5, 143);
+    cursor: pointer;
+}
+
+.divBanner {
+    background: rgb(241, 241, 241);
+    margin-top: 40px;
+    padding-top: 55px;
+    padding-bottom: 32px;
+}

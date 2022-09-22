@@ -1,0 +1,137 @@
+<h1 mat-dialog-title>Formulario producto</h1>
+<div [formGroup]="productForm">
+    <div mat-dialog-content>
+        <div fxLayout="row" layout-wrap layout-align="space-between center">
+            <div fxFlex="50">
+                <mat-form-field style="width: 90%;">
+                    <mat-label>Código referencia</mat-label>
+                    <input formControlName="codeReference" ngDefaultControl matInput placeholder="Digite nuevo código">
+                    <mat-error *ngIf="codeReference.invalid">
+                        El campo código es requerido
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div fxFlex="50">
+                <mat-form-field style="width: 90%;">
+                    <mat-label>Descripción</mat-label>
+                    <input formControlName="description" ngDefaultControl matInput
+                        placeholder="Digite nueva descripción">
+                    <mat-error *ngIf="description.invalid">
+                        El campo descripción es requerido
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div fxLayout="row" layout-wrap layout-align="space-between center">
+            <div fxFlex="50">
+                <mat-form-field style="width: 90%;">
+                    <mat-label>Unidades máximas</mat-label>
+                    <input type="number" formControlName="maximumItem" ngDefaultControl matInput
+                        placeholder="Digite nuevo código">
+                    <mat-error *ngIf="maximumItem.invalid">
+                        El campo unidades máximas es requerido
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div fxFlex="50">
+                <mat-form-field style="width: 90%;">
+                    <mat-label>Unidades mínimas</mat-label>
+                    <input type="number" formControlName="minimumItem" ngDefaultControl matInput
+                        placeholder="Digite nueva descripción">
+                    <mat-error *ngIf="minimumItem.invalid">
+                        El campo unidades mínimas es requerido
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div fxLayout="row" layout-wrap layout-align="space-between center">
+            <div fxFlex="50">
+                <mat-form-field style="width: 90%;">
+                    <mat-label>Cantidad</mat-label>
+                    <input type="number" formControlName="quantity" ngDefaultControl matInput
+                        placeholder="Digite nuevo código">
+                    <mat-error *ngIf="quantity.invalid">
+                        El campo cantidad es requerido
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div fxFlex="50">
+                <mat-form-field style="width: 90%;">
+                    <mat-label>Precio unitario</mat-label>
+                    <input type="number" formControlName="unitPrice" ngDefaultControl matInput
+                        placeholder="Digite nueva descripción">
+                    <mat-error *ngIf="unitPrice.invalid">
+                        El campo precio unitario es requerido
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div fxLayout="row" layout-wrap layout-align="space-between center">
+            <div fxFlex="50">
+                <mat-form-field style="width: 90%;" *ngIf="tradeMarkList.length > 0; else withouthTrades">
+                    <mat-label>Marca</mat-label>
+                    <mat-select formControlName="tradeMarkId" (selectionChange)="onChangeTradeMark($event)"
+                        ngDefaultControl matInput>
+                        <mat-option *ngFor="let tradeMark of tradeMarkList" [value]="tradeMark.tradeMarkId">
+                            {{tradeMark.tradeMarkName}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="tradeMarkId.invalid">
+                        El campo cantidad es requerido
+                    </mat-error>
+                </mat-form-field>
+                <ng-template #withouthTrades>
+                    Sin Marcas
+                </ng-template>
+            </div>
+            <div fxFlex="50">
+                <mat-form-field style="width: 90%;"
+                    *ngIf="referenceTradeMarkList.length > 0; else withouthReferencesTrades">
+                    <mat-label>Referencia</mat-label>
+                    <mat-select formControlName="referenceTradeMarkId" ngDefaultControl matInput>
+                        <mat-option *ngFor="let referencetradeMark of referenceTradeMarkList"
+                            [value]="referencetradeMark.referenceTradeMarkId">
+                            {{referencetradeMark.referenceName}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="referenceTradeMarkId.invalid">
+                        El campo referencia es requerido
+                    </mat-error>
+                </mat-form-field>
+                <ng-template #withouthReferencesTrades>
+                    Sin Marcas
+                </ng-template>
+            </div>
+        </div>
+        <div fxLayout="row" layout-wrap layout-align="space-between center">
+            <div fxFlex="50">
+                <mat-slide-toggle color="primary" formControlName="isAvailable" ngDefaultControl matInput>¿Activo?
+                </mat-slide-toggle>
+            </div>
+            <div fxFlex="50">
+                <mat-form-field style="width: 90%;">
+                    <mat-label>Observación</mat-label>
+                    <textarea formControlName="observation" ngDefaultControl matInput
+                        placeholder="Digite nuevo nombre"></textarea>
+                    <mat-error *ngIf="observation.invalid">
+                        El campo nombre es requerido
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div fxLayout="row" layout-wrap layout-align="space-between center">
+            <div fxFlex="100">
+                <div class="file-drop-area" [style.background]="this.background">
+                    <span class="fake-btn">Escoger archivos</span>
+                    <span class="file-msg">{{fileNameOrMessage}}</span>
+                    <input class="file-input" accept="image/*" type="file" (change)="setFile($event.target.files)">
+                    <img *ngIf="fileBase64 != ''" [src]="transform()">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick('cancel')">Cancelar</button>
+    <button mat-button (click)="onNoClick('save')" cdkFocusInitial>Guardar</button>
+</div>

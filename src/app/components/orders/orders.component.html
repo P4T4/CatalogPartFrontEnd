@@ -1,0 +1,74 @@
+<div class="custom-title-header">
+    <h2 class="text-white m-0">Mis Pedidos</h2>
+</div>
+<div class="form-group row rowOrder">
+    <div class="col-md-10">
+        <div class="row">
+            <label for="inputPassword" class="col-sm-4 col-form-label">N° Orden</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" [(ngModel)]="numberOrder" #ctrl="ngModel" required id="inputN"
+                    placeholder="Número de Orden">
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5" *ngIf="enableUserField">
+        <div class="row">
+            <label for="inputPassword" class="col-sm-4 col-form-label">Usuario</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" [(ngModel)]="nameUser" #ctrl="ngModel" required id="inputUser"
+                    placeholder="Usuario">
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="col-md-2">
+            <button (click)="filterList()" mat-raised-button color="primary">Buscar</button>
+        </div>
+    </div>
+</div>
+<div class="divContent" *ngFor="let purchase of listPurchase">
+    <div class="row divHead">
+        <div class="col-md-3 col-xs-6 col-sm-6">
+            <div class="text"><span class="head">Número de orden:</span> {{purchase.numberOrder}}
+            </div>
+        </div>
+        <div class="col-md-3 col-xs-6 col-sm-6">
+            <div class="text"><span class="head">Fecha:</span> {{purchase.createdDate | date:
+                'short'}}</div>
+        </div>
+        <div class="col-md-3 col-xs-6 col-sm-6">
+            <div class="text"><span class="head">Costo:</span> {{purchase.total | currency}}</div>
+        </div>
+        <div class="col-md-3 col-xs-6 col-sm-6">
+            <div class="text"><span class="head">Estado:</span> {{purchase.transactionStateLabel}}
+            </div>
+        </div>
+    </div>
+    <div style="padding-left: 8px; padding-right: 8px;" class="row">
+        <table class="cart-table default-bg mat-elevation-z1"
+            [@animate]="{value:'*',params:{delay: '100ms', x:'-50px'}}">
+            <thead>
+                <tr>
+                    <th class="text-muted"></th>
+                    <th class="text-muted">Producto</th>
+                    <th class="text-muted">Cantidad</th>
+                    <th class="text-muted">Precio</th>
+                    <th class="text-muted">Subtotal</th>
+                    <th class="text-muted">Iva</th>
+                    <th class="text-muted">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="trCustom" *ngFor="let product of purchase.purchaseProductList">
+                    <td><img class="cart-thumbnail" src="assets/images/mock-logo-1.png"></td>
+                    <td>{{getFullName(product)}}</td>
+                    <td>{{product.quantity}}</td>
+                    <td>{{product.unitPrice| currency}}</td>
+                    <td>{{product.totalProductPrice| currency}}</td>
+                    <td>{{product.totalTaxPrice| currency}}</td>
+                    <td>{{product.totalProductPrice + product.totalTaxPrice | currency}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

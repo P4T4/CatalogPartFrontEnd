@@ -1,0 +1,61 @@
+<div layout="row" layout-wrap>
+    <div flex class="custom-title-header">
+        <h1>Administrar referencias</h1>
+    </div>
+    <!-- BUTTONS -->
+    <div flex>
+        <button *ngIf="!hasSelectedChecked" mat-raised-button (click)="openDialog(null)">Crear</button>
+        <button *ngIf="hasSelectedChecked" mat-raised-button (click)="openDialog(selected_temporal)">Editar</button>
+    </div>
+    <!-- FORM FILTER -->
+    <div fxLayout fxLayoutAlign="center center">
+        <mat-form-field appearance="outline" fxFlex="100%">
+            <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filtro global...">
+        </mat-form-field>
+    </div>
+    <!-- TABLE -->
+    <div flex class="mt-4">
+        <div class="mat-elevation-z8">
+            <table style="width: 100%;" mat-table [dataSource]="dataSource" class="mat-elevation-z8" #tabla1 matSort>
+
+                <ng-container matColumnDef="referenceTradeMarkId">
+                    <th mat-header-cell *matHeaderCellDef>
+                        Acciones
+                        <!-- <mat-checkbox color="primary" (change)="$event ? masterToggle() : null"
+                            [checked]="selection.hasValue() && isAllSelected()"
+                            [indeterminate]="selection.hasValue() && !isAllSelected()">
+                        </mat-checkbox> -->
+                    </th>
+                    <td mat-cell *matCellDef="let marca">
+                        <mat-slide-toggle color="primary" (click)="$event.stopPropagation()"
+                            (change)="individualSelection(marca, $event)" [checked]="selection.isSelected(marca)">
+                        </mat-slide-toggle>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="referenceCode">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Código </th>
+                    <td mat-cell *matCellDef="let marca"> {{marca.referenceCode}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="referenceName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+                    <td mat-cell *matCellDef="let marca"> {{marca.referenceName}} </td>
+                </ng-container>
+                
+                <ng-container matColumnDef="isActive">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+                    <td mat-cell *matCellDef="let marca"> {{marca.isActive ? 'Activo': 'Inactivo'}} </td>
+                </ng-container>
+                
+                <ng-container matColumnDef="tradeMarkName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Marca </th>
+                    <td mat-cell *matCellDef="let marca"> {{marca.tradeMarkName}} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+                <tr mat-row *matRowDef="let row; columns: columnas;"></tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+        </div>
+    </div>

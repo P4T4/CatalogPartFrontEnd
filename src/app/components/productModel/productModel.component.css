@@ -1,0 +1,49 @@
+.colorButton {
+    color: #ffc107;
+    background-color: rgb(27, 30, 102);
+    width: 100px;
+    margin-left: 30px;
+}
+
+.material-icons {
+    color: #ffc107;
+}
+
+.content-header {
+    height: 100px;
+}
+
+.body {
+    font-size: 15px;
+    margin: 20px;
+    margin-bottom: 40px;
+}
+
+.content-card .card-body {
+    font-size: 15px;
+    margin: 20px;
+    margin-bottom: 35px;
+}
+
+.colorText {
+    background: rgb(51, 101, 177);
+}
+
+.atras {
+    color: rgba(95, 91, 91, 0.61);
+}
+
+.tableHead {
+    text-align: center;
+    margin-left: 30px;
+    margin-right: auto;
+    font-weight: bold;
+    font-size: 20px;
+    color: rgb(27, 30, 102);
+}
+
+.tableBody {
+    text-align: center;
+    margin-left: 30px;
+    margin-right: auto;
+}

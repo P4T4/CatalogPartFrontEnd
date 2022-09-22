@@ -1,0 +1,61 @@
+<h2>Detalle de venta</h2>
+<table style="width: 100%;" mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+    <ng-container matColumnDef="codeReference">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Código referencia </th>
+        <td mat-cell *matCellDef="let marca"> {{marca.codeReference}} </td>
+    </ng-container>
+    <ng-container matColumnDef="tradeMarkName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre producto </th>
+        <td mat-cell *matCellDef="let marca"> {{marca.tradeMarkName}} | {{marca.referenceName}} </td>
+    </ng-container>
+    <ng-container matColumnDef="totalProductPrice">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Precio </th>
+        <td mat-cell *matCellDef="let marca"> {{marca.totalProductPrice | currency}} </td>
+    </ng-container>
+    <ng-container matColumnDef="purchaseProductState">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado Actual </th>
+        <td mat-cell *matCellDef="let marca"> {{getNameState(marca.purchaseProductState)}} </td>
+    </ng-container>
+    <ng-container matColumnDef="purchaseProductStateCurrent">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado siguiente </th>
+        <td mat-cell *matCellDef="let marca; let i = index">
+            <mat-slide-toggle (change)="changeValueChecked(i)" color="primary">
+                {{ !boolChecked[i] ? getNameState(5) : getNameState(marca.purchaseProductState+1) }}
+            </mat-slide-toggle>
+        </td>
+    </ng-container>
+    <ng-container matColumnDef="observation">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Observaciones </th>
+        <td mat-cell *matCellDef="let marca; let i = index;">
+            <div *ngIf="!boolChecked[i]; else isTrueBoolChecked">
+                <mat-form-field style="width: 90%;">
+                    <mat-label>Observación</mat-label>
+                    <input matInput placeholder="Digite nueva observación" [id]="'observation'+i">
+                </mat-form-field>
+            </div>
+            <ng-template #isTrueBoolChecked>
+                No aplica
+            </ng-template>
+        </td>
+    </ng-container>
+    <!-- <ng-container matColumnDef="purchaseId">
+        <th mat-header-cell *matHeaderCellDef>
+            <mat-checkbox (change)="$event ? masterToggle() : null"
+                [checked]="selection.hasValue() && isAllSelected()"
+                [indeterminate]="selection.hasValue() && !isAllSelected()">
+            </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let marca">
+            <mat-checkbox (click)="$event.stopPropagation()" (change)="individualSelection(marca)"
+                [checked]="selection.isSelected(marca)">
+            </mat-checkbox>
+        </td>
+    </ng-container> -->
+    <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnas;"></tr>
+    <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+</table>
+<div class="button-modal-purchase">
+    <button mat-raised-button (click)="onclick('Close')" cdkFocusInitial>Cancelar</button>
+    <button mat-raised-button color="primary" (click)="onclick('Save')" cdkFocusInitial>Guardar</button>
+</div>

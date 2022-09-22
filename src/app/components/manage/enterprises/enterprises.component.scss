@@ -1,0 +1,63 @@
+.colorButton {
+    color: #ffc107;
+    background-color: rgb(27, 30, 102);
+    width: 100px;
+    margin-left: 30px;
+}
+
+.material-icons {
+    color: #ffc107;
+}
+
+.content-header {
+    height: 50px;
+    padding-left: 24px;
+    padding-top: 24px;
+    padding-bottom: 10px;
+}
+
+.body {
+    font-size: 15px;
+    margin: 20px;
+    margin-bottom: 40px;
+}
+
+.content-card .card-body {
+    font-size: 15px;
+    margin: 10px;
+    margin-top: 3px;
+    margin-bottom: 12px;
+    padding: 15px;
+}
+
+.colorText {
+    //background: rgb(51, 101, 177);
+    background: rgb(151, 170, 197);
+}
+
+.header-bg {
+    height: 75px;
+}
+
+.tableHead {
+    text-align: center;
+    margin-left: 30px;
+    margin-right: auto;
+    font-weight: bold;
+    font-size: 18px;
+    color: rgb(27, 30, 102);
+}
+
+.tableBody {
+    text-align: center;
+    margin-left: 30px;
+    margin-right: auto;
+}
+
+.btnEdit {
+    color: rgb(27, 30, 102);
+}
+
+.btnDelete {
+    color: red;
+}

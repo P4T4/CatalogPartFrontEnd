@@ -1,0 +1,99 @@
+<h1 matDialogTitle>{{data.title}}</h1>
+<!-- FALTA AGREGAR MENSAJES DE LAS EXPRESIONES REGULARES -->
+<!-- {{"AGREGAR" | translate }} {{"USUARIO" | translate }} -->
+<form [formGroup]="itemForm" (ngSubmit)="submit()">
+  <div fxLayout="row wrap" fxLayout.lt-sm="column">
+    <div fxFlex="50" class="pr-1">
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Nombre usuario</mat-label>
+        <input matInput name="username" pattern="^[a-zA-Z\s]+$" [formControl]="itemForm.controls['name']"
+          placeholder="Nombre">
+        <mat-error *ngIf="name.invalid">
+          El campo es requerido
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div fxFlex="50" class="pr-1">
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Correo</mat-label>
+        <input matInput type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" name="email"
+          [formControl]="itemForm.controls['email']" placeholder="Correo">
+        <mat-error *ngIf="email.invalid">
+          El campo es requerido
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div fxFlex="50" class="pr-1">
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Identificación</mat-label>
+        <input matInput type="number" pattern="^[0-9]+$" name="identification"
+          [formControl]="itemForm.controls['identification']" placeholder="Identificación">
+        <mat-error *ngIf="identification.invalid">
+          El campo es requerido
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div fxFlex="50" class="pr-1">
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Ciudad</mat-label>
+        <input matInput name="city" pattern="^[a-zA-Z\s]+$" [formControl]="itemForm.controls['city']"
+          placeholder="Ciudad">
+        <mat-error *ngIf="city.invalid">
+          El campo es requerido
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div fxFlex="50" class="pr-1">
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Dirección</mat-label>
+        <input matInput name="address" [formControl]="itemForm.controls['address']" placeholder="Dirección">
+        <mat-error *ngIf="phone.invalid">
+          El campo es requerido
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div fxFlex="50" class="pr-1">
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Telefono</mat-label>
+        <input matInput name="phone" pattern="^[0-9]+$" [formControl]="itemForm.controls['phone']"
+          placeholder="Telefono">
+        <mat-error *ngIf="address.invalid">
+          El campo es requerido
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div fxFlex="50" class="pr-1">
+      <mat-form-field class="full-width" appearance="outline" *ngIf="isAdmin; else isAdminClientEnterprise">
+        <mat-label>Seleccione empresa</mat-label>
+        <select name="enterprise" matNativeControl [formControl]="itemForm.controls['enterprise']">
+          <option value="">Seleccione una empresa</option>
+          <option [value]="company.enterpriseId" *ngFor="let company of companiesList">{{company.businessName}}</option>
+        </select>
+        <mat-error *ngIf="enterprise.invalid">
+          El campo es requerido
+        </mat-error>
+      </mat-form-field>
+      <ng-template #isAdminClientEnterprise>
+        Empresa: {{enterpriseNameClientAdmin?.businessName}}
+      </ng-template>
+    </div>
+
+    <!-- <div fxFlex="50" class="pt-1 pr-1">
+      <mat-slide-toggle [formControl]="itemForm.controls['isActive']">Active Customer</mat-slide-toggle>
+    </div> -->
+
+
+
+    <div fxFlex="100" class="mt-1">
+      <button mat-raised-button color="primary" [disabled]="itemForm.invalid">{{"Guardar" | translate }}</button>
+      <span fxFlex></span>
+      <button mat-button color="warn" type="button" (click)="dialogRef.close(false)">Cancelar</button>
+    </div>
+  </div>
+</form>

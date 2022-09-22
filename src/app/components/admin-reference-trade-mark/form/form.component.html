@@ -1,0 +1,52 @@
+<h1 mat-dialog-title>Formulario referencia</h1>
+<div [formGroup]="referenceTradeMarkForm">
+    <div mat-dialog-content>
+        <div fxLayout="row" layout-wrap layout-align="space-between center">
+            <div fxFlex="50">
+                <mat-form-field style="width: 90%;" *ngIf="tradeMarkList.length > 0; else withouthTrades">
+                    <mat-label>Marca</mat-label>
+                    <mat-select formControlName="tradeMarkId" ngDefaultControl matInput>
+                        <mat-option *ngFor="let tradeMark of tradeMarkList" [value]="tradeMark.tradeMarkId">
+                            {{tradeMark.tradeMarkName}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="tradeMarkId.invalid">
+                        El campo marca es requerido
+                    </mat-error>
+                </mat-form-field>
+                <ng-template #withouthTrades>
+                    Sin Marcas
+                </ng-template>
+            </div>
+            <div fxFlex="50">
+                <mat-form-field style="width: 90%;">
+                    <mat-label>Nombre</mat-label>
+                    <input formControlName="referenceName" ngDefaultControl matInput placeholder="Digite nuevo nombre">
+                    <mat-error *ngIf="referenceName.invalid">
+                        El campo nombre es requerido
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div fxLayout="row" layout-wrap layout-align="space-between center">
+            <div fxFlex="50">
+                <mat-slide-toggle color="primary" formControlName="isActive" ngDefaultControl matInput>¿Activo?
+                </mat-slide-toggle>
+            </div>
+            <!-- <div fxFlex="50">
+                <mat-form-field style="width: 90%;">
+                    <mat-label>Codigo</mat-label>
+                    <input type="text" formControlName="referenceCode" ngDefaultControl matInput
+                        placeholder="Digite nuevo código">
+                    <mat-error *ngIf="referenceCode.invalid">
+                        El campo código es requerido
+                    </mat-error>
+                </mat-form-field>
+            </div> -->
+        </div>
+    </div>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick('cancel')">Cancelar</button>
+    <button mat-button (click)="onNoClick('save')" cdkFocusInitial>Guardar</button>
+</div>

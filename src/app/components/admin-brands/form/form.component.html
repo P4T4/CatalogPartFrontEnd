@@ -1,0 +1,61 @@
+<h1 mat-dialog-title>Formulario marca</h1>
+<div [formGroup]="tradeMarkForm">
+    <div mat-dialog-content>
+        <div fxLayout="row" class="row-custom" layout-wrap layout-align="space-between center">
+            <!-- <div fxFlex="50">
+                <mat-form-field style="width: 90%;">
+                    <mat-label>Código</mat-label>
+                    <input type="number" formControlName="tradeMarkCode" ngDefaultControl matInput
+                        placeholder="Digite nuevo código">
+                    <mat-error *ngIf="tradeMarkCode.invalid">
+                        El campo código es requerido
+                    </mat-error>
+                </mat-form-field>
+            </div> -->
+            <div fxFlex="50">
+                <mat-form-field style="width: 90%;" appearance="outline">
+                    <mat-label>Nombre</mat-label>
+                    <input formControlName="tradeMarkName" ngDefaultControl matInput placeholder="Digite nuevo nombre">
+                    <mat-error *ngIf="tradeMarkName.invalid">
+                        El campo nombre es requerido
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div fxLayout="row" class="row-custom" layout-wrap layout-align="space-between center">
+            <div fxFlex="50">
+                <mat-slide-toggle color="primary" formControlName="isActive" ngDefaultControl matInput>¿Activo?
+                </mat-slide-toggle>
+            </div>
+            <div fxFlex="50">
+                <mat-slide-toggle color="primary" formControlName="isExternalFrame" ngDefaultControl matInput>¿Código
+                    externo?
+                </mat-slide-toggle>
+            </div>
+        </div>
+        <div fxLayout="row" class="row-custom" layout-wrap layout-align="space-between center">
+            <div fxFlex="50" *ngIf="isExternalFrame.value">
+                <mat-form-field style="width: 90%;" appearance="outline">
+                    <mat-label>Codigo externo</mat-label>
+                    <textarea formControlName="codeExternalFrame" ngDefaultControl matInput
+                        placeholder="Digite nuevo nombre"></textarea>
+                    <mat-error *ngIf="codeExternalFrame.invalid">
+                        El campo código externo es requerido
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div fxFlex="100">
+                <div class="file-drop-area" [style.background]="this.background">
+                    <span class="fake-btn">Escoger archivos</span>
+                    <span class="file-msg">{{fileNameOrMessage}}</span>
+                    <input class="file-input" accept="image/*" type="file" (change)="setFile($event.target.files)">
+                    <img *ngIf="fileBase64 != ''" [src]="transform()">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick('cancel')">Cancelar</button>
+    <button mat-button (click)="onNoClick('save')" cdkFocusInitial>Guardar</button>
+</div>

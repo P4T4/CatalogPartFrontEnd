@@ -1,0 +1,50 @@
+<div class="page-wrap height-100 black">
+    <div class="session-form-hold">
+        <mat-progress-bar mode="determinate" class="session-progress"></mat-progress-bar>
+        <mat-card>
+            <mat-card-content>
+                <div class="text-center pt-8 pb-16">
+                    <img width="60px" src="assets/images/egret.png" alt="" class="mb-05">
+                    <h2>¡ Empecemos !</h2>
+                    <p class="text-muted m-0">Regístrese para usar nuestros servicios</p>
+                </div>
+                <form [formGroup]="signupForm" (ngSubmit)="signup()">
+                    <div class="">
+                        <mat-form-field class="full-width">
+                            <input matInput type="email" name="email" [formControl]="signupForm.controls['email']" placeholder="Correo electrónico" value="">
+                        </mat-form-field>
+                        <small *ngIf="signupForm.controls['email'].hasError('required') && signupForm.controls['email'].touched" class="form-error-msg"> Correo eléctronico es requerido.</small>
+
+                        <small *ngIf="signupForm.controls['email'].hasError('email') && signupForm.controls['email'].touched" class="form-error-msg"> Dirección de correo eletrónico inválido. </small>
+                    </div>
+
+                    <div class="">
+                        <mat-form-field class="full-width">
+                            <input type="password" name="password" matInput [formControl]="signupForm.controls['password']" placeholder="Contraseña" value="">
+                        </mat-form-field>
+                        <small *ngIf="signupForm.controls['password'].hasError('required') && signupForm.controls['password'].touched" class="form-error-msg"> Contraseña es obligatoria. </small>
+                    </div>
+
+                    <div class="">
+                        <mat-form-field class="full-width">
+                            <input type="password" name="confirmPassword" matInput [formControl]="signupForm.controls['confirmPassword']" placeholder="Confirmar contraseña" value="">
+                        </mat-form-field>
+                        <small *ngIf="signupForm.controls['confirmPassword'].hasError('required') && signupForm.controls['confirmPassword'].touched" class="form-error-msg">Confirmar la contraseña es obligatorio.</small>
+                        <small *ngIf="signupForm.controls['confirmPassword'].hasError('equalTo')" class="form-error-msg">Las contraseñas no coinciden.</small>
+                    </div>
+
+                    <div class="pb-1">
+                        <mat-checkbox name="agreed" [formControl]="signupForm.controls['agreed']" class="pb-1">He leído y acepto los términos del servicio.</mat-checkbox>
+
+                        <small *ngIf="signupForm.controls['agreed'].hasError('agreed') && signupForm.controls['agreed'].touched" class="form-error-msg"> Debe aceptar los términos y condiciones. </small>
+                    </div>
+
+                    <button mat-raised-button class="mat-primary full-width mb-1" [disabled]="signupForm.invalid">Registrarse</button>
+                    <div class="text-center">
+                        <a [routerLink]="'/sessions/signin'" class="text-center full-width">Iniciar sesión con una cuenta existente</a>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

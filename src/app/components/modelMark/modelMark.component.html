@@ -1,0 +1,31 @@
+<div flex class="custom-title-header">
+    <button mat-icon-button class="text-muted" (click)="Back()">
+        <mat-icon class="text-color-white"> chevron_left </mat-icon>
+        <span class="text-color-white">Regresar</span>
+    </button>
+    <h1>Selecciona un modelo:</h1>
+</div>
+<div flex class="mt-4">
+    <div class="mat-elevation-z8">
+        <div fxLayout="row wrap" class="divContainer" *ngIf="content">
+            <div fxFlex="100" fxFlex.gt-sm="50" fxFlex.sm="50" *ngFor="let model of referenceTradeMarkList">
+                <mat-card class="default divCard">
+                    <div class="divModel" (click)="viewProduct(model.referenceTradeMarkId)">
+                        {{model.referenceName}}
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<h1 class="divContainer">Seleccione un modelo: </h1>
+<div fxLayout="row wrap" class="divContainer" *ngIf="content">
+    <div fxFlex="100" fxFlex.gt-sm="50" fxFlex.sm="50" *ngFor="let model of referenceTradeMarkList">
+        <mat-card class="default divCard">
+            <div class="divModel" (click)="viewProduct(model.referenceTradeMarkId)">
+                {{model.referenceName}}
+            </div>
+        </mat-card>
+    </div>
+</div>-->

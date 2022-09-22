@@ -1,0 +1,67 @@
+<div flex class="custom-title-header">
+    <h1>Administrar inventario</h1>
+</div>
+<div layout="row" layout-wrap>
+    <div class="container-buttons-inventory justify-center">
+        <ng-container *ngIf="(isExcelFile === false && touchForm === true)">
+            <p class="alert alert-danger">
+                <strong>Archivo invalido!</strong> Por favor adjunte un archivo con la extension .xlsx.
+            </p>
+        </ng-container>
+        <ng-container *ngIf="(validFormat === false && touchForm === true)">
+            <div>
+                <p class="alert alert-danger">
+                    <strong>Formato invalido!</strong> Al parecer el archivo cargado no permite cargar porque las
+                    cabeceras
+                    no coinciden, descargue la plantilla.
+                </p>
+                <a download="PlantillaCargueInventario" target="_blank" href="assets/PlantillaCargue.xlsx">
+                    <button mat-fab color="warn" class="fixed-button">
+                        <mat-icon>file_download</mat-icon>
+                    </button>
+                </a>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="hasDocuments && (validFormat === true && touchForm === true)">
+            <p class="alert alert-success">
+                <strong>Formato valido!</strong> Ya puedes cargar el archivo, dando click en "Cargar datos".
+            </p>
+        </ng-container>
+    </div>
+    <div class="container-buttons-inventory justify-center">
+        <div class="fileUpload" dragAndDropDirective (files)="onChange($event)" (click)="inputFile.click()">
+            <input type="file" (change)="onChange($event)" #inputFile accept=".xlsx">
+            <h3>Arrastra y suelta o selecciona un archivo {{fileName}}</h3>
+        </div>
+    </div>
+    <ng-container *ngIf="touchForm === true">
+        <div class="container-buttons-inventory justify-around my-12">
+            <button (click)="removeData()" mat-raised-button color="primary">Remover datos</button>
+            <button *ngIf="(validFormat === true && touchForm === true)" (click)="uploadData()" mat-raised-button
+                color="primary">Cargar datos</button>
+        </div>
+    </ng-container>
+    <!-- WHEN EXISTS DATA -->
+    <!-- TABLE -->
+    <div flex class="mt-4 container-custom-table" *ngIf="hasDocuments">
+        <div class="mat-elevation-z8 w90 custom-container-table">
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th *ngFor="let key of keys">
+                            {{key}}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of dataSheet | async | slice: 0 : 100; index as i">
+                        <td>{{i+1}}</td>
+                        <td *ngFor="let key of keys">
+                            {{item[key]}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
